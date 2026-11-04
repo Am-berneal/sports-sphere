@@ -195,7 +195,11 @@ export const tournamentTeams = [
   'Chem Crusaders', 'Biotech FC', 'Electrical Sparks', 'Thunderbolts FC',
 ]
 
-export const initialFixtures = [
+// If you add src/data/real/fixtures.json (made by scripts/convert_ipl.py),
+// the app uses it automatically. Otherwise it uses the sample fixtures below.
+const REAL = import.meta.glob('./real/*.json', { eager: true, import: 'default' })
+
+const sampleFixtures = [
   { id: 'M1', round: 'Group A', date: 'Nov 14', time: '3:30 PM', venue: 'Main Ground', teamA: 'CSE Strikers', teamB: 'ECE Warriors', scoreA: 2, scoreB: 1, status: 'Completed' },
   { id: 'M2', round: 'Group A', date: 'Nov 14', time: '5:00 PM', venue: 'Main Ground', teamA: 'Mech Iron Gears', teamB: 'Civil Titans', scoreA: 1, scoreB: 1, status: 'Completed' },
   { id: 'M3', round: 'Group B', date: 'Nov 15', time: '3:30 PM', venue: 'Main Ground', teamA: 'Chem Crusaders', teamB: 'Biotech FC', scoreA: 0, scoreB: 2, status: 'Completed' },
@@ -205,6 +209,8 @@ export const initialFixtures = [
   { id: 'M7', round: 'Group B', date: 'Nov 17', time: '3:30 PM', venue: 'Main Ground', teamA: 'Chem Crusaders', teamB: 'Thunderbolts FC', scoreA: null, scoreB: null, status: 'Scheduled' },
   { id: 'M8', round: 'Group B', date: 'Nov 17', time: '5:00 PM', venue: 'Main Ground', teamA: 'Biotech FC', teamB: 'Electrical Sparks', scoreA: null, scoreB: null, status: 'Scheduled' },
 ]
+
+export const initialFixtures = Array.isArray(REAL['./real/fixtures.json']) ? REAL['./real/fixtures.json'] : sampleFixtures
 
 // Points rule: Win = 3, Draw = 1, Loss = 0  (Technical challenge #3)
 export function computeStandings(fixtures) {

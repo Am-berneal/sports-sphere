@@ -1,0 +1,178 @@
+[
+  {
+    "id": "r1",
+    "name": "N. Rossi",
+    "dept": "Club Atlético",
+    "pos": "GK",
+    "role": "GK",
+    "skill": 4
+  },
+  {
+    "id": "r2",
+    "name": "T. Okubo",
+    "dept": "Shimizu S-Pulse",
+    "pos": "GK",
+    "role": "GK",
+    "skill": 3
+  },
+  {
+    "id": "r3",
+    "name": "J. Bogle",
+    "dept": "Sheffield United",
+    "pos": "DEF",
+    "role": "RWB",
+    "skill": 8
+  },
+  {
+    "id": "r4",
+    "name": "S. Bușu",
+    "dept": "FC U Craiova",
+    "pos": "DEF",
+    "role": "LB",
+    "skill": 2
+  },
+  {
+    "id": "r5",
+    "name": "C. Goteni",
+    "dept": "Grenoble Foot 38",
+    "pos": "DEF",
+    "role": "CB",
+    "skill": 2
+  },
+  {
+    "id": "r6",
+    "name": "N. Bürgy",
+    "dept": "BSC Young Boys",
+    "pos": "DEF",
+    "role": "CB",
+    "skill": 3
+  },
+  {
+    "id": "r7",
+    "name": "David García",
+    "dept": "CA Osasuna",
+    "pos": "DEF",
+    "role": "CB",
+    "skill": 10
+  },
+  {
+    "id": "r8",
+    "name": "Adriano Junqueiras",
+    "dept": "Sport Club",
+    "pos": "DEF",
+    "role": "CB",
+    "skill": 5
+  },
+  {
+    "id": "r9",
+    "name": "David Goldar",
+    "dept": "UD Ibiza",
+    "pos": "DEF",
+    "role": "CB",
+    "skill": 5
+  },
+  {
+    "id": "r10",
+    "name": "T. Baldé",
+    "dept": "Le Havre AC",
+    "pos": "DEF",
+    "role": "RB",
+    "skill": 1
+  },
+  {
+    "id": "r11",
+    "name": "B. King",
+    "dept": "St. Patrick's",
+    "pos": "MID",
+    "role": "RM",
+    "skill": 3
+  },
+  {
+    "id": "r12",
+    "name": "B. Danger",
+    "dept": "Rodez Aveyron",
+    "pos": "MID",
+    "role": "CM",
+    "skill": 3
+  },
+  {
+    "id": "r13",
+    "name": "E. Brignola",
+    "dept": "Benevento",
+    "pos": "MID",
+    "role": "CAM",
+    "skill": 5
+  },
+  {
+    "id": "r14",
+    "name": "J. Doyle-Hayes",
+    "dept": "Hibernian",
+    "pos": "MID",
+    "role": "CDM",
+    "skill": 4
+  },
+  {
+    "id": "r15",
+    "name": "S. Augustijns",
+    "dept": "RKC Waalwijk",
+    "pos": "MID",
+    "role": "CDM",
+    "skill": 1
+  },
+  {
+    "id": "r16",
+    "name": "Lucas Souza",
+    "dept": "APOEL Nicosia FC",
+    "pos": "MID",
+    "role": "CDM",
+    "skill": 6
+  },
+  {
+    "id": "r17",
+    "name": "J. Windass",
+    "dept": "Sheffield",
+    "pos": "FWD",
+    "role": "ST",
+    "skill": 5
+  },
+  {
+    "id": "r18",
+    "name": "L. Jović",
+    "dept": "Real Madrid CF",
+    "pos": "FWD",
+    "role": "ST",
+    "skill": 10
+  },
+  {
+    "id": "r19",
+    "name": "E. Shomurodov",
+    "dept": "Roma",
+    "pos": "FWD",
+    "role": "ST",
+    "skill": 6
+  },
+  {
+    "id": "r20",
+    "name": "Jonaldo Santoso",
+    "dept": "Atlético Clube",
+    "pos": "FWD",
+    "role": "ST",
+    "skill": 5
+  },
+  {
+    "id": "r21",
+    "name": "J. Reid",
+    "dept": "Stevenage",
+    "pos": "FWD",
+    "role": "ST",
+    "skill": 1
+  },
+  {
+    "id": "r22",
+    "name": "B. Gueye",
+    "dept": "FC Erzgebirge",
+    "pos": "FWD",
+    "role": "ST",
+    "skill": 4
+  }
+]

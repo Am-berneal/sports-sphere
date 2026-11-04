@@ -5,7 +5,11 @@
 export const SKILL_LABEL = (s) => (s >= 8 ? 'Advanced' : s >= 5 ? 'Intermediate' : 'Beginner')
 
 // 22 checked-in players for an intramural football friendly
-export const footballPool = [
+// If you add src/data/real/players.json (made by scripts/convert_players.py),
+// the app uses it automatically. Otherwise it uses the sample list below.
+const REAL = import.meta.glob('./real/*.json', { eager: true, import: 'default' })
+
+const samplePool = [
   { id: 'p1', name: 'Amberneal Singh', dept: 'CSE', pos: 'MID', role: 'CM', skill: 8 },
   { id: 'p2', name: 'Arjun Rao', dept: 'Mech', pos: 'DEF', role: 'CB', skill: 8 },
   { id: 'p3', name: 'Kunal Sharma', dept: 'Civil', pos: 'DEF', role: 'CB', skill: 8 },
@@ -29,6 +33,8 @@ export const footballPool = [
   { id: 'p21', name: 'Sameer K.', dept: 'Civil', pos: 'FWD', role: 'RW', skill: 5 },
   { id: 'p22', name: 'Deepak K.', dept: 'Meta', pos: 'FWD', role: 'LW', skill: 6 },
 ]
+
+export const footballPool = Array.isArray(REAL['./real/players.json']) ? REAL['./real/players.json'] : samplePool
 
 export const POSITIONS = [
   ['GK', 'Goalkeeper'],

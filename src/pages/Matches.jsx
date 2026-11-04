@@ -23,6 +23,7 @@ export default function Matches() {
   const standings = useMemo(() => computeStandings(fixtures), [fixtures])
   const role = getRole()
 
+  const groups = [...new Set(fixtures.map((f) => f.round))]
   const shown = fixtures.filter((f) => round === 'All' || f.round === round)
   const scheduled = shown.filter((f) => f.status !== 'Completed')
   const completed = shown.filter((f) => f.status === 'Completed')
@@ -59,7 +60,7 @@ export default function Matches() {
           ))}
         </div>
         <div className="flex gap-2">
-          {['All', 'Group A', 'Group B'].map((r) => (
+          {['All', ...groups].map((r) => (
             <button key={r} onClick={() => setRound(r)} className={`rounded-full px-4 py-1.5 text-sm ${round === r ? 'bg-brand-blue text-white' : 'bg-navy-800 text-slate-300'}`}>
               {r === 'All' ? 'All Stages' : r}
             </button>
@@ -107,7 +108,7 @@ export default function Matches() {
 
       {tab === 'standings' && (
         <div className="grid gap-6 lg:grid-cols-2">
-          {['Group A', 'Group B'].filter((g) => round === 'All' || g === round).map((g) => (
+          {groups.filter((g) => round === 'All' || g === round).map((g) => (
             <div key={g} className="card overflow-hidden">
               <div className="border-b border-white/5 px-5 py-4 font-semibold">{g}</div>
               <div className="overflow-x-auto">
@@ -137,7 +138,7 @@ export default function Matches() {
                   </tbody>
                 </table>
               </div>
-              <div className="px-5 py-3 text-xs text-slate-500">Top 2 qualify for semi-finals · Win 3, Draw 1, Loss 0</div>
+              <div className="px-5 py-3 text-xs text-slate-500">Points: Win 3 · Draw/No result 1 · Loss 0 · Top 2 highlighted</div>
             </div>
           ))}
         </div>

@@ -73,6 +73,37 @@ phone numbers or roll numbers. Ask Sports Sphere only runs read-only `SELECT` qu
 The Team Balancer (`src/lib/teamBalancer.js`) is our own algorithm: players are grouped by
 position, and each player goes to the team with the lower total skill so far.
 
+## Using a real dataset (optional)
+
+The app uses sample data by default. To use public datasets instead:
+
+1. **Team Balancer — FIFA player ratings (Kaggle).** Download a FIFA/EA FC players CSV
+   (e.g. `players_22.csv` from the "FIFA 22 complete player dataset"), then run:
+   ```bash
+   pip install pandas
+   python scripts/convert_players.py path/to/players_22.csv
+   ```
+   This writes `src/data/real/players.json` (22 players, FIFA "overall" mapped to a 1–10 skill).
+2. **Fixtures & standings — IPL matches (Kaggle).** Download "IPL Complete Dataset" (2008-2020 or 2008-2024),
+   then run:
+   ```bash
+   python scripts/convert_ipl.py path/to/matches.csv 2024
+   ```
+   This writes `src/data/real/fixtures.json` (the season's league matches; the last 6 are left "Scheduled"
+   for the Score Entry demo; wins recorded as 1–0, no-result as a draw).
+3. Restart `npm run dev`. The app loads `src/data/real/*.json` automatically.
+   Delete those files to go back to the sample data.
+4. If old results still show, clear the site data in your browser (saved demo results are kept there).
+
+Check each dataset's licence on its Kaggle page and credit it in your report.
+
+### Data currently included
+
+- `src/data/real/players.json` — 22 players sampled from **FIFA 22 complete player dataset** (`players_22.csv`, Kaggle).
+- `src/data/real/fixtures.json` — **IPL 2024 league stage** (67 matches) from **IPL Complete Dataset** (`matches.csv`, Kaggle).
+
+All other screens still use sample data.
+
 ## Stability
 
 - Every page is wrapped in an error boundary, so one broken page shows a message instead of a blank screen.
