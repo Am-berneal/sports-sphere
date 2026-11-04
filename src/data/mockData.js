@@ -213,6 +213,13 @@ const sampleFixtures = [
 export const initialFixtures = Array.isArray(REAL['./real/fixtures.json']) ? REAL['./real/fixtures.json'] : sampleFixtures
 
 // Points rule: Win = 3, Draw = 1, Loss = 0  (Technical challenge #3)
+// True when results are only win/loss (e.g. cricket from the IPL dataset, stored as 1–0).
+// Goal difference has no meaning then, so the tables show Wins/Losses instead.
+export function isWinLossOnly(fixtures) {
+  const done = fixtures.filter((m) => m.status === 'Completed')
+  return done.length > 0 && done.every((m) => [0, 1].includes(m.scoreA) && [0, 1].includes(m.scoreB) && !(m.scoreA === 1 && m.scoreB === 1))
+}
+
 export function computeStandings(fixtures) {
   const table = {}
   fixtures.forEach((m) => {

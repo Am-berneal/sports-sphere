@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CalendarDays, MapPin, Trophy, Edit3, Download } from 'lucide-react'
 import { PageHeader, StatusBadge, SampleDataNote } from '../components/ui'
-import { initialFixtures, computeStandings } from '../data/mockData'
+import { initialFixtures, computeStandings, isWinLossOnly } from '../data/mockData'
 import { getRole } from '../components/Layout'
 
 export function loadFixtures() {
@@ -24,6 +24,7 @@ export default function Matches() {
   const role = getRole()
 
   const groups = [...new Set(fixtures.map((f) => f.round))]
+  const winLoss = isWinLossOnly(fixtures)
   const shown = fixtures.filter((f) => round === 'All' || f.round === round)
   const scheduled = shown.filter((f) => f.status !== 'Completed')
   const completed = shown.filter((f) => f.status === 'Completed')
@@ -96,7 +97,7 @@ export default function Matches() {
                 {[[m.teamA, m.scoreA, aWin], [m.teamB, m.scoreB, bWin]].map(([t, s, w]) => (
                   <div key={t} className="flex items-center justify-between py-1.5">
                     <span className={`font-semibold ${w ? 'text-brand-green' : ''}`}>{t} {w && <Trophy size={14} className="ml-1 inline" />}</span>
-                    <span className={`font-display text-2xl font-bold ${w ? 'text-brand-green' : 'text-slate-300'}`}>{s}</span>
+                    <span className={`font-display text-2xl font-bold ${w ? 'text-brand-green' : 'text-slate-300'}`}>{winLoss ? (w ? 'W' : m.scoreA === m.scoreB ? 'NR' : 'L') : s}</span>
                   </div>
                 ))}
                 <div className="mt-3 flex items-center gap-1 text-xs text-slate-500"><MapPin size={13} /> {m.venue}</div>
@@ -115,7 +116,7 @@ export default function Matches() {
                 <table className="w-full text-sm">
                   <thead className="text-xs uppercase tracking-wide text-slate-400">
                     <tr>
-                      {['#', 'Team', 'P', 'W', 'D', 'L', 'GD', 'Pts'].map((h) => (
+                      {(winLoss ? ['#', 'Team', 'P', 'W', 'NR', 'L', 'Pts'] : ['#', 'Team', 'P', 'W', 'D', 'L', 'GD', 'Pts']).map((h) => (
                         <th key={h} className={`px-4 py-3 ${h === 'Team' ? 'text-left' : 'text-center'}`}>{h}</th>
                       ))}
                     </tr>
@@ -131,14 +132,14 @@ export default function Matches() {
                         <td className="px-4 py-3 text-center">{s.W}</td>
                         <td className="px-4 py-3 text-center">{s.D}</td>
                         <td className="px-4 py-3 text-center">{s.L}</td>
-                        <td className="px-4 py-3 text-center">{s.GF - s.GA > 0 ? '+' : ''}{s.GF - s.GA}</td>
+                        {!winLoss && <td className="px-4 py-3 text-center">{s.GF - s.GA > 0 ? '+' : ''}{s.GF - s.GA}</td>}
                         <td className="px-4 py-3 text-center font-bold text-brand-green">{s.Pts}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <div className="px-5 py-3 text-xs text-slate-500">Points: Win 3 · Draw/No result 1 · Loss 0 · Top 2 highlighted</div>
+              <div className="px-5 py-3 text-xs text-slate-500">{winLoss ? 'Points: Win 3 · No result 1 · Loss 0 · NR = no result · Top 2 highlighted' : 'Points: Win 3 · Draw 1 · Loss 0 · Top 2 highlighted'}</div>
             </div>
           ))}
         </div>

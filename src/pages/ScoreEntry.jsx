@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Lock, Save, Send, CheckCircle2, Minus, Plus, RotateCcw } from 'lucide-react'
 import { PageHeader, StatusBadge } from '../components/ui'
-import { computeStandings, initialFixtures } from '../data/mockData'
+import { computeStandings, initialFixtures, isWinLossOnly } from '../data/mockData'
 import { loadFixtures } from './Matches'
 
 export default function ScoreEntry() {
@@ -23,6 +23,7 @@ export default function ScoreEntry() {
     setDone(false)
   }
 
+  const winLoss = isWinLossOnly(fixtures)
   const preview = useMemo(() => {
     const next = fixtures.map((f) => (f.id === matchId ? { ...f, scoreA: scores.a, scoreB: scores.b, status: 'Completed' } : f))
     return computeStandings(next).filter((s) => s.group === match.round)
@@ -132,18 +133,18 @@ export default function ScoreEntry() {
         <aside className="card h-fit overflow-hidden">
           <div className="border-b border-white/5 p-5">
             <div className="font-semibold">Standings preview · {match.round}</div>
-            <div className="text-xs text-slate-400">If this result is published (W 3 · D 1 · L 0)</div>
+            <div className="text-xs text-slate-400">If this result is published (W 3 · {winLoss ? 'NR' : 'D'} 1 · L 0)</div>
           </div>
           <table className="w-full text-sm">
             <thead className="text-xs uppercase text-slate-400">
-              <tr><th className="px-4 py-2 text-left">Team</th><th className="px-2 py-2">P</th><th className="px-2 py-2">GD</th><th className="px-4 py-2">Pts</th></tr>
+              <tr><th className="px-4 py-2 text-left">Team</th><th className="px-2 py-2">P</th><th className="px-2 py-2">{winLoss ? 'W' : 'GD'}</th><th className="px-4 py-2">Pts</th></tr>
             </thead>
             <tbody>
               {preview.map((s, i) => (
                 <tr key={s.team} className={`border-t border-white/5 ${[match.teamA, match.teamB].includes(s.team) ? 'bg-brand-blue/10' : ''}`}>
                   <td className="px-4 py-3">{i + 1}. {s.team}</td>
                   <td className="px-2 py-3 text-center">{s.P}</td>
-                  <td className="px-2 py-3 text-center">{s.GF - s.GA}</td>
+                  <td className="px-2 py-3 text-center">{winLoss ? s.W : s.GF - s.GA}</td>
                   <td className="px-4 py-3 text-center font-bold text-brand-green">{s.Pts}</td>
                 </tr>
               ))}
